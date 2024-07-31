@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gokul</title>
+        <meta name="veiw-port" content="width=device-width, initial-scale= 1">
+        <meta charset="utf-8">
+        <meta name="author" content="Gokul">
+        <meta name="keywords" content="Gokul portfolio">
+        <meta name="description" content="Gokul's portfolio website">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'website/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'website/css/mobile.css' %}">
+        <script src="{% static 'website/js/main.js'  %}"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=
+        Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=
+        Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>   
+    
+    </head>
+
+    <body>
+        <header class="header ">
+            <div class="header1">
+                <p class="logo "> GOKUL</p>
+            <div class="head">
+                <nav class="nav ">
+                    <a href="#">HOME</a>
+                    <a href="#about">ABOUT</a>
+                    <a href="#skill">SKILLS</a>
+                    <a href="#project">PROJECTS</a>
+                    <a href="#contact">CONTACT</a>
+                </nav>
+                <button class="ltBtn ">Ping Me</button>
+            </div>
+            </div>
+            
+        </header>
+        <main>
+            <section class="hero">
+                <div class=" hero1">
+                    <div class="content">
+                        <p class="htxt1">I'M  GOKUL </p>
+                        <p id="hero" class="htxt2">I'm a Developer </p>
+                        <button class="hbtn"> Hire Me</button>
+                    </div>
+                    <div class="hero-image ">
+                        <img src='{% static "website/images/hero.png" %}' alt="Gokul's Picture">
+                    </div>
+                </div>
+       
+            </section>
+            <section class="about-me" id="about">
+                <p class="abtxt"> ABOUT ME</p>
+                <div class="abt">
+                    <div class="abt-img">
+                        <img src='{% static "website/images/about-img.jpg" %}' alt="" class="abt-img1">
+                    </div>
+                    <div>
+                        <p class="abt-txt1"> I'm {{profile.name }}</p>
+                        <p class="abt-txt2">{{ profile.about }}</p>
+                        <div class="show">
+                            <section class="show-btn">
+                                <input id="edu-btn" onclick="showEdu()" class="edu-btn" type="button" value="EDUCATION">
+                                <input id="pd-btn" onclick="showPd()" class="pd-btn" type="button" value="PERSONAL DOSSIER">
+                                <div class="empty"></div> 
+                            </section>
+                            <div class="tbl-edu">
+                                <table id="edu" class="tbl-abt1">
+                                    {% for edu in education %}
+                                    <tr>
+                                        <td> <b>{{ edu.deg}} - {{ edu.percent }}%:</b><br>{{ edu.institution}}( {{edu.year}}) </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                                <table class="tbl-abt2" id="pd">
+                                    <tr>
+                                        <th> Father's Name</th> <td>{{profile.father_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th> D.O.B</th> <td>{{profile.dob}} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Sex</th> <td> {{profile.sex}} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Physically challenged</th> <td> {{profile.physical_challenged}} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> State</th> <td> {{profile.state}} </td>
+                                    </tr>
+                                </table> 
+                            </div>        
+                           
+                        </div>
+                        <a href='{{resume.resume_file.url }}' target="_blank"> <button class="btn-ds"> Resume</button></a>
+                    </div>    
+                </div>
+            </section>
+            <section class="skills" id="skill">
+                <p class="sklTxt"> MY SKILLS</p>
+                <div class="skl">
+                    <p> I'm an web developer with experience to write fixible code to provide solution for complex web design problems
+                        through the skills that I have in the technologies as the mention below  </p>
+                    {% for card in skill %}
+                    <div class="card">
+                        <img src="{{card.image.url}}" alt="">
+                        <span>{{ card.name}} </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="project" id="project">
+                <div class="pro-txt">
+                    <span><p class="proTxt1">PROJECTS</p></span>
+                    <span><p class="proTxt2">Build design and web projects</p></span>
+                </div>
+                <div class="proj">
+                    {% for proj in project%}
+                    <div class="proCard">
+                        <p class="proTxt">{{ proj.discription}}</p>
+                        <div class="proInfo">
+                            <div class="proImg"><img class="proImg1" src="{{proj.icon.url}}" alt=""></div>
+                            <p class="proName"><a href="" target="_blank"> {{proj.name}} </a></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </section>
+            <section class="contact" id="contact">
+                <p class="contactText">CONTACT</p>
+                <div class="contact1">
+                    <p class="formTxt">Leave your Message</p>
+                    <div class="form1">
+                        <form action="" method="post" class="form">
+                            {% csrf_token %}
+                            {{ contact_form.as_p }}
+                            <button type="submit">Submit</button>
+                        </form>
+
+                        {% comment %}
+                        <form action="" class="form">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name"  required>
+                            <label for=" email"> Email:</label>
+                            <input type="email" name="email" id="email" required>
+                            <label for="phone">Phone:</label>
+                            <input type="tel" name="phone" id="phone"required>
+                            <label for="msg"> Message:</label>
+                            <textarea name="msg" id="msg" cols="30" rows="10" required></textarea>
+                            <div class="formBtn">
+                                <button class="subBtn" type="submit">submit</button>
+                                <button class="clrBtn">clear</button>
+                            </div>
+                        </form>
+                        {% endcomment %}
+                        <div  class="formRht">
+                            <div class="fr1">
+                                
+                                <div class="call">
+                                    <div class="call1">
+                                        <img src="{% static 'website/images/phone-volume-solid.svg' %}" alt="">
+                                    <a href="tel:8489422354">PHONE</a>
+                                    </div>
+                                    <p>8489422354</p>
+                                </div>
+                                <div class="call">
+                                    <div class="call1">
+                                        <img src="{% static 'website/images/envelope-solid.svg' %}" alt="">
+                                    <a href="mailto:gokulpannerselvam02@gmail.com">E-MAIL</a>
+                                    </div>
+                                    <p>gokulpannerselvam02@gmail.com</p>
+                                </div>
+                                <div class="call">
+                                    <div class="call1">
+                                        <img src="{% static 'website/images/location-dot-solid.svg' %}" alt="">
+                                    <a href="">ADDRESS</a>
+                                    </div>
+                                    <p>No.5, Malai Nagar,<br>
+                                    Acharappakam,<br>
+                                    Chengalpattu,<br>
+                                    603301.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="con-icon">
+                                <a href=""><img src="{% static 'website/images/whatsapp.svg' %}" alt=""></a>     
+                                <a href=""><img src="{% static 'website/images/envelope-solid.svg' %}" alt=""></a> 
+                                <a href=""><img src="{% static 'website/images/linkedin.svg' %}" alt=""></a>  
+                            </div>
+                          
+                        </div> 
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="footer">
+                <p>@2024 ALL COPY RIGHTS RESERVED</p>
+            </div>
+        </footer>
+    </body>
+</html>
